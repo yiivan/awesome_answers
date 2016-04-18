@@ -1,0 +1,38 @@
+<h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+<p>View Count: <%= @question.view_count %></p>
+<p>Created By: <%= @question.user_full_name.titleize %></p>
+
+<%# can? is a helper method that came from the CanCanCan gem to help us enforce
+    authorization rules in the views and controllers. We didn't specifically
+    put rules for :edit and :destroy but we put a rule for :crud which includes
+    both of them. %>
+<% if can? :update, @question %>
+  <%= link_to "Edit", edit_question_path(@question) %>
+<% end %>
+<% if can? :destroy, @question %>
+  <%= link_to "Delete", question_path(@question),
+                        method: :delete,
+                        data: {confirm: "Are you sure?"} %>
+<% end %>
+<hr>
+
+
+<%= @answer.errors.full_messages.join(", ") %>
+<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
+<%= form_for [@question, @answer] do |form_helper|  %>
+  <%= form_helper.text_area :body %>
+  <%= form_helper.submit %>
+<% end %>
+
+<h2>Answers</h2>
+<% @question.answers.each do |ans| %>
+  <%= ans.body %>
+  by: <%= ans.user_full_name.titleize %>
+  <% if can? :destroy, ans %>
+    <%= link_to "delete", question_answer_path(@question, ans),
+                          data: {confirm: "Are you sure?"},
+                          method: :delete %>
+  <% end %>
+  <hr>
+<% end %>

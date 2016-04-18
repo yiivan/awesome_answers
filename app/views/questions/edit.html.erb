@@ -1,0 +1,26 @@
+<h1>Edit Question</h1>
+<%# @question.errors.full_messages.join(", ") %>
+<%# If you give the `form_for` helper an ActiveRecord object that is persisted
+    then the generated form will have an action that submits to
+     `question_path(@question)` wherer @question is the ActiveRecord object that
+     you passed to the form. The action will be PATCH (using the _method wordaround) %>
+<%# form_for @question do |f| %>
+  <!-- <div> -->
+    <%# f.label :title %>
+    <%# f.text_field :title %>
+  <!-- </div> -->
+  <!-- <div> -->
+    <%# f.label :body %>
+    <%# f.text_area :body %>
+  <!-- </div> -->
+  <%# f.submit %>
+<%# end %>
+
+
+
+
+<%# you can use full path `/questions/form` %>
+<%#= render "/questions/form" %>
+
+<%# if the partial is in the same folder, you can simply use: %>
+<%= render "form" %>
