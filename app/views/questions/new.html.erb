@@ -1,0 +1,29 @@
+<h1>New Question</h1>
+
+<%# @question.errors.full_messages.join(", ") %>
+
+<%# form_for is a Rails helper method that accepts an ActiveRecord object as
+    the first argument.
+    if @question is not persisted in the database, form_for makes the `action`
+    of the form go to `questions_path` (Rails convention) and it will make the
+    `method` of `form` be POST
+    %>
+<%# form_for @question do |f| %>
+  <!-- <div> -->
+    <%# f.label :title %>
+    <%# by using f.text_field :title, if @question has a value for the attribute
+        `title` it will populate the field with that value. This is usually the
+        case when redisplaying the form after an error occurs %>
+    <%# f.text_field :title %>
+  <!-- </div> -->
+  <!-- <div> -->
+    <%# f.label :body %>
+    <%# f.text_area :body %>
+  <!-- </div> -->
+  <%# f.submit %>
+<%# end %>
+
+
+
+
+<%= render "form" %>

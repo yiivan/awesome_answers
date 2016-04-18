@@ -1,7 +1,7 @@
 class ContactUsController < ApplicationController
 
   def new
-
+    render :new, layout: "special"
   end
 
   def create

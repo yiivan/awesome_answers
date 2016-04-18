@@ -11,11 +11,37 @@ Rails.application.routes.draw do
   # for this route we will have helper methods: about_us_path and about_us_url
   get "/about" => "welcome#about", as: :about_us
 
-
   get  "/contact_us" => "contact_us#new"
   post "/contact_us" => "contact_us#create" # this will have the same helper
                                             # method as the route above because
-                                            # they have the same URL
+                                            # they have the same URL "/contact_us"
+
+  resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+    # delete :destroy, on: :member
+    # delete :destroy
+  end
+
+  resources :questions do
+    # get :search, on: :collection
+    # get :search, on: :member
+    # get :search
+
+    # the answers routes will be the standard ones prefixed: /questions/:question_id
+    # this way when, for instance, we want to create an answer we know the
+    # question that it references
+    # all the helpers will be the same as before prefixed with `question_`
+    resources :answers, only: [:create, :destroy]
+  end
+  # get    "/questions/new"      => "questions#new"   , as: :new_question
+  # post   "/questions"          => "questions#create", as: :questions
+  # get    "/questions/:id"      => "questions#show"  , as: :question
+  # get    "/questions"          => "questions#index"
+  # get    "/questions/:id/edit" => "questions#edit"  , as: :edit_question
+  # patch  "/questions/:id"      => "questions#update"
+  # delete "/questions/:id"      => "questions#destroy"
 
   # this defines the `root` or home page or our application to go to the
   # WelcomeController with `index` action. We will have access to the helper

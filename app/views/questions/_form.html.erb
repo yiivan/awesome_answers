@@ -1,0 +1,34 @@
+<%# form_for is a Rails helper method that accepts an ActiveRecord object as
+    the first argument.
+    if @question is not persisted in the database, form_for makes the `action`
+    of the form go to `questions_path` (Rails convention) and it will make the
+    `method` of `form` be POST
+    %>
+
+<%# this file `_form.html.erb` is considered to be a partial which means you
+    can include it in any other template (such as new.html.erb and edit.html.erb)
+    you must start the partial name with '_'. Partials have access to the same
+    instance variables available in the templates (e.g. @question) %>
+
+
+<%= @question.errors.full_messages.join(", ") %>
+<%# If you give the `form_for` helper an ActiveRecord object that is persisted
+    then the generated form will have an action that submits to
+     `question_path(@question)` wherer @question is the ActiveRecord object that
+     you passed to the form. The action will be PATCH (using the _method wordaround) %>
+
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <div>
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
+  </div>
+  <%= f.submit %>
+<% end %>

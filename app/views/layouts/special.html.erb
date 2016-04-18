@@ -17,25 +17,12 @@
   <!-- <a href="<%= about_us_path %>">About</a> -->
   <%= link_to "About", about_us_path({a: 'hello', b: 123}) %>
   |
-  <%= link_to "Questions", questions_path %>
-  |
   <%= link_to "Contact Us", contact_us_path %>
-  |
-  <%= link_to "New Question", new_question_path %>
-  |
-  <% if user_signed_in? %>
-    Hello <%= current_user.first_name %>,
-    <%= link_to "Log out", sessions_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign In", new_session_path %>
-    <%= link_to "Sign Up", new_user_path %>
-  <% end %>
 
   <hr>
-  <%#= flash[:notice] || flash[:alert] %>
-  <%= notice || alert %>
-  <hr>
 
+  <h1>Special layout</h1>
+  
   <%= yield %>
 
 </body>
